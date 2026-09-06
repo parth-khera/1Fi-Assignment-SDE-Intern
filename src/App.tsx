@@ -1,26 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import HomeScreen from './screens/HomeScreen';
+import ShopScreen from './screens/shop/ShopScreen';
+import { TopBrandsScreen, NearbyStoresScreen } from './screens/shop/StubScreens';
+import MarketplaceScreen from './screens/marketplace/MarketplaceScreen';
+import ProductDetailScreen from './screens/marketplace/ProductDetailScreen';
+import OrderReviewScreen from './screens/marketplace/OrderReviewScreen';
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomeScreen />} />
+        <Route path="/shop" element={<ShopScreen />} />
+        <Route path="/shop/top-brands" element={<TopBrandsScreen />} />
+        <Route path="/shop/nearby" element={<NearbyStoresScreen />} />
+        <Route path="/shop/marketplace" element={<MarketplaceScreen />} />
+        <Route path="/shop/marketplace/review" element={<OrderReviewScreen />} />
+        <Route path="/shop/marketplace/:productId" element={<ProductDetailScreen />} />
+        {/* Catch-all */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
